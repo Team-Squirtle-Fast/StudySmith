@@ -1,0 +1,61 @@
+@import './variables.scss';
+
+body,html {
+    margin: 0;
+    padding: 0;
+}
+* {
+    box-sizing: border-box;
+}
+
+h1 {
+    font-family: 'Poppins';
+    color: $ss-blue;
+    text-align: center;
+}
+
+.create-account {
+    font-family: Roboto;
+    text-decoration: none;
+    color: $ss-grey;
+}
+
+.loginPage {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100vh;
+}
+
+.logoContainer {
+    background-color: $ss-blue;
+    text-align: center;
+
+    display: grid;
+    place-items: center;
+}
+
+.inputContainer {
+    background-color: $ss-white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+button {
+    font-family: Roboto;
+    color: $ss-white;
+    background-color: $ss-orange;
+    border: none;
+    border-radius: 16px;
+
+    font-size: 16px;
+
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 12px;
+    padding-right: 12px;
+
+    margin-top: 8px;
+}
