@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const controller = require('');
+const controller = require('../controller/controller.js');
 
 
 router.post('/signup', controller.createAccount, (req, res) => {
-    return res.send('successfully created new account');
+    return res.status(200).json('successfully created new account');
 });
 
 
