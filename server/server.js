@@ -13,7 +13,7 @@ const routes = require('./routes/controller.js')
 //we are statically serving the files from the dist folder
 app.use(express.static(path.resolve(__dirname, '../dist')));
 
-app.use('/controller', routes);
+app.use('/api', routes);
 
 
 
