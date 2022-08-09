@@ -5,7 +5,7 @@ const controller = require('../controller/controller.js');
 
 
 router.post('/signup', controller.createAccount, (req, res) => {
-    return res.status(200).json('successfully created new account');
+    return res.status(200).json(res.locals.account);
 });
 
 
