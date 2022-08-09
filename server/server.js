@@ -6,9 +6,15 @@ const app = express();
 //we want to declare a port for the application to listen on
 const port = 3000;
 
+const routes = require('./routes/controller.js')
+
+
 //postgres://pzllqlln:E2fKwbQhwCUYMjXZul51bFBNu4HAfq0i@lallah.db.elephantsql.com/pzllqlln
 //we are statically serving the files from the dist folder
 app.use(express.static(path.resolve(__dirname, '../dist')));
+
+app.use('/controller', routes);
+
 
 
 //local error handler 
