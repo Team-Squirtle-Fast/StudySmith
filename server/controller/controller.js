@@ -21,7 +21,7 @@ module.exports = {
       //we then push the hashed password into the array
       accArr.push(hash)
       //we insert the array into the query statment to add a user to the database
-      pool.query('INSERT INTO "Users"("first_name","last_name", "username", "email", "hash_password") VALUES($1,$2,$3,$4,$5)', accArr, (err,data) => {
+      pool.query('INSERT INTO Users(first_name,last_name, username, email, hash_password) VALUES($1,$2,$3,$4,$5)', accArr, (err,data) => {
         if(err) {
           //if error we want to send to front to be unsucessful
           res.locals.account = 'unsucessful'
@@ -43,7 +43,7 @@ module.exports = {
     //first we want to desructure the request body 
     const { username, password } = req.body
     //then we want to query the database and pull the data that matches the username 
-    pool.query('SELECT * FROM "Users" WHERE "username" = $1', [username], (err, user) => {
+    pool.query('SELECT * FROM Users WHERE username = $1', [username], (err, user) => {
       if (err) {
         next({
           log: 'Express error handler caught in login middleware function',
@@ -52,12 +52,13 @@ module.exports = {
       } else {
         //then we want to use bcrypt compare to compare the password given from the request and the hashed passwoed from the db
         bcrypt.compare(password, user.rows[0].hash_password, (err, result) => {
-          if (err){
+          if (result === false){
             next({
-              log:'Wrong password',
+              log:'Wrong username/password',
               message:{ err }
             })
           }else{
+            console.log('RESULT:' + result)
             return next();
           }
         })
@@ -66,7 +67,9 @@ module.exports = {
 
   },
   //need a sucessful login middleware 
-  loginSucess: (res,req,next) => {
+  loginSucess: (req,res,next) => {
+   
+    //console.log(req)
     //we want the three most recent tasks that correspond with userid
     //we want all the skills with the corresponding userid 
     //we want to query for that dates daily log that correspond with user id
