@@ -1,0 +1,19 @@
+@import './variables.scss';
+
+body {
+    background-color: $ss-white;
+}
+
+.signUpContainer {
+    margin-top: 25px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    font-family: 'Poppins';
+    color: $ss-blue;
+    text-align: center;
+}
