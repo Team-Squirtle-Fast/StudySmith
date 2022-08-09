@@ -9,7 +9,7 @@ const App = (props) => {
     const loggedIn = false; // update with state
     if(loggedIn){
         return(
-            <div>
+            <div className='app'>
                 <Navbar/>
                 <Outlet/>
             </div>
