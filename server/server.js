@@ -5,11 +5,19 @@ const path = require('path');
 const app = express();
 //we want to declare a port for the application to listen on
 const port = 3000;
-
-//postgres://pzllqlln:E2fKwbQhwCUYMjXZul51bFBNu4HAfq0i@lallah.db.elephantsql.com/pzllqlln
 //we are statically serving the files from the dist folder
 app.use(express.static(path.resolve(__dirname, '../dist')));
+//require the controller to test in postman 
+const { createAccount, postToData, login } = require('./controller/controller')
+app.use(express.json())
 
+//-------Delete later was just testing using post man-------
+// app.post('/', createAccount, (req,res) => {
+//   return res.status(200).send('sucessful')
+// })
+app.get('/', login, (req,res) => {
+  return res.status(200).send('sucess')
+})
 
 //local error handler 
 app.use((req, res) => res.status(404).send('Page not Found'));
