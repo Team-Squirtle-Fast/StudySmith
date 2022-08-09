@@ -6,12 +6,12 @@ const app = express();
 //we want to declare a port for the application to listen on
 const port = 3000;
 
-const routes = require('./routes/controller.js')
-
-
-//postgres://pzllqlln:E2fKwbQhwCUYMjXZul51bFBNu4HAfq0i@lallah.db.elephantsql.com/pzllqlln
+const routes = require('./routes/controller.js');
 //we are statically serving the files from the dist folder
 app.use(express.static(path.resolve(__dirname, '../dist')));
+//require the controller to test in postman 
+const { createAccount, postToData, login } = require('./controller/controller')
+app.use(express.json())
 
 app.use('/controller', routes);
 
