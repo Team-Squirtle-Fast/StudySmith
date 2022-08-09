@@ -3,8 +3,8 @@ import { combineReducers } from 'redux';
 // import reducers below
 import userReducer from './userReducer'
 
-const reducers = combineReducers({
+const reducer = combineReducers({
     userReducer,
 })
 
-export default reducers;
+export default reducer;
