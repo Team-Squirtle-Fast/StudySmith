@@ -23,11 +23,15 @@ module.exports = {
       //we insert the array into the query statment to add a user to the database
       pool.query('INSERT INTO "Users"("first_name","last_name", "username", "email", "hash_password") VALUES($1,$2,$3,$4,$5)', accArr, (err,data) => {
         if(err) {
+          //if error we want to send to front to be unsucessful
+          res.locals.account = 'unsucessful'
           next({
             log: 'Express error handler caught in createAccount middleware function',
             message: { err }
           });
         }else{
+          //if we can add to database then we want to send to the front sucessful
+          res.locals.account = 'sucessful'
           return next();
   
         }

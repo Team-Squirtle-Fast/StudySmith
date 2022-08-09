@@ -40,6 +40,9 @@ module.exports = {
     port: 8080,
     static: {
         directory: path.join(__dirname)
-    }
+    },
+    proxy: {
+      '/api': 'http://localhost:3000',
+    },
   }
 }
