@@ -21,7 +21,7 @@ const Signup = (props) => {
             || !firstnameRef.current.value || !lastnameRef.current.value || !emailRef.current.value) {
             window.alert('Please ensure all fields are populated.')
         } else {
-            fetch('/signup', {
+            fetch('/api/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/JSON',
@@ -29,17 +29,15 @@ const Signup = (props) => {
                 body: JSON.stringify({
                     username: usernameRef.current.value,
                     password: passwordRef.current.value,
-                    firstname: firstnameRef.current.value,
-                    lastname: lastnameRef.current.value,
+                    firstName: firstnameRef.current.value,
+                    lastName: lastnameRef.current.value,
                     email: emailRef.current.value,
                 })
             })
             .then((res) => res.json())
             .then((res) => {
-                if(res === 'Unsuccessful: email'){
-                    window.alert('Please provide a different email address')
-                } else if (res === 'Unsuccessful: username'){
-                    window.alert('Username already taken - please provide a different username')
+                if(res === 'unsucessful'){
+                    window.alert('Username or email registered to another account')
                 } else {
                     // Was a success update login state, and update state with provided values
                     navigate('../', {replace: true});

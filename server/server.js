@@ -6,7 +6,7 @@ const app = express();
 //we want to declare a port for the application to listen on
 const port = 3000;
 
-const routes = require('./routes/controller.js');
+const routes = require('./routes/routes.js');
 //we are statically serving the files from the dist folder
 app.use(express.static(path.resolve(__dirname, '../dist')));
 //require the controller to test in postman 
