@@ -17,11 +17,11 @@ export const addSkills = data => ({
   payload: data
 });
 
-export const getLogin = (username, password) => ({
-  type: LOGIN_SUCCESS,
-  payload: { username, password }
+export const getLogin = (username) => ({
+  type: types.LOGIN_SUCCESS,
+  //payload: { username }
 });
 
 export const getLogout = () => ({
-  type: LOGOUT_SUCCESS
+  type: types.LOGOUT_SUCCESS
 });

@@ -1,8 +1,10 @@
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import InputLabel from './InputLabel.jsx';
 import '../../styles/Signup.scss';
+import { getLogin } from "../actions/actions.js";
 
 const Signup = (props) => {
     const firstnameRef = useRef(null);
@@ -13,6 +15,7 @@ const Signup = (props) => {
     const emailRef = useRef(null);
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleSubmit = () => {
         if(passwordRef.current.value !== confirmpasswordRef.current.value){
@@ -36,11 +39,11 @@ const Signup = (props) => {
             })
             .then((res) => res.json())
             .then((res) => {
-                if(res === 'unsucessful'){
-                    window.alert('Username or email registered to another account')
-                } else {
-                    // Was a success update login state, and update state with provided values
+                if(res === 'sucessful'){
+                    dispatch(getLogin());
                     navigate('../', {replace: true});
+                } else {
+                    window.alert('Username or email registered to another account')
                 }
             })
             .catch((err) => console.log(err))
