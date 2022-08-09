@@ -70,9 +70,35 @@ module.exports = {
     //we want the three most recent tasks that correspond with userid
     //we want all the skills with the corresponding userid 
     //we want to query for that dates daily log that correspond with user id
+  },
+
+  ////////////////////////////////
+
+
+// getSkills
+  getSkills: (req, res, next) => {
+
+    const { skillID } = req.body;
+
+    pool.query('SELECT skill_name, skill_status, skill_notes FROM Skills WHERE skill_id = skillID')
+      .then(data => {
+       
+      })
+      .then(data => {
+
+      })
+      .catch(err => next())
   }
+
+// updateSkills
+// deleteSkills
+// addSkills
+
 }
 
 
 
 //later we want to use bycrypt compare to compare plain text to the salted and hashed pass 
+
+
+
