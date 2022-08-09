@@ -1,3 +1,10 @@
-.helloworld{
-    color: pink;
+@import './variables.scss';
+
+body {
+    background-color: $ss-white;
+}
+
+.app {
+    display: grid;
+    grid-template-columns: 175px 1fr;
 }
