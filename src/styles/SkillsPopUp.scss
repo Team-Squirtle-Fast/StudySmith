@@ -1,0 +1,64 @@
+@import './variables.scss';
+
+.modal {
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.modal_content {
+  background-color: $ss-white;
+  position: absolute;
+  top: 20%;
+  left: 30%;
+  width: 40%;
+  padding: 20px;
+  border-radius: 5px;
+  border: none;
+
+  font-family: 'Roboto';
+}
+
+.popup-title {
+  font-family: 'Poppins';
+  color: $ss-grey;
+  margin-bottom: 10px;
+  margin-top: 5px;
+
+  background-color: transparent;
+  border: none;
+
+  font-size: 20px;
+}
+
+.popup-title:focus {
+  outline: none;
+}
+
+.select-status {
+  font-family: Roboto;
+}
+
+.skills-popup-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.select-status {
+  background-color: transparent;
+}
+
+.skills-popup-notes {
+  font-family: 'Roboto';
+  margin-bottom: 10px;
+  resize: vertical;
+  width: 100%;
+  min-height: 150px;
+  color: $ss-black;
+  background-color: transparent;
+}

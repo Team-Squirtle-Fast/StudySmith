@@ -8,7 +8,7 @@ const Navbar = (props) => {
         <nav>
             <Link to='/'>Home</Link>
             <Link to='/calendar'>Calendar</Link>
-            <Link to='/dailylog'>Daily Log</Link>
+            <Link to='/log'>Daily Log</Link>
             <Link to='/resources'>Resources</Link>
             <Link to='/settings'>Settings</Link>
         </nav>
