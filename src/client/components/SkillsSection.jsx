@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import '../../styles/Home.scss';
 import Skill from './Skill.jsx';
 import { toggleSkills } from "../actions/actions";
-import { SkillsPopUp } from './SkillsPopUp.jsx';
 
 const SkillsSection = (props) => {    
     const skillArray = [];
@@ -24,7 +23,7 @@ const SkillsSection = (props) => {
     })
 
     return (
-        <div>
+        <div className='skills-section'>
             <h2 className='homeHeader'>
                 Skills
             </h2>

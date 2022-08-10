@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 
 import InputLabel from './InputLabel.jsx';
@@ -12,6 +12,7 @@ const LogIn = (props) => {
     const passwordRef = useRef(null);
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleSubmit = () => {
         fetch('/api/login', {
@@ -24,7 +25,8 @@ const LogIn = (props) => {
                 password: passwordRef.current.value,
             })
         })
-        .then((res) => res.json())
+        .then((res) => {
+            return res.json()})
         .then((res) => {
             if (res === 'unsuccessful') {
                 window.alert('Incorrect credentials provided')
@@ -67,8 +69,8 @@ const LogIn = (props) => {
         <div className='loginPage'>
             <div className='inputContainer'>
                 <h1>Welcome</h1>
-                <InputLabel id='username' label='Username: '/>
-                <InputLabel id='password' label='Password: ' inputType='password'/>
+                <InputLabel id='username' label='Username: ' ref={usernameRef}/>
+                <InputLabel id='password' label='Password: ' inputType='password' ref={passwordRef}/>
                 <Link to='/signup' className='create-account'>Create an Account</Link>
                 <div>
                     <button onClick={handleSubmit}>Submit</button>

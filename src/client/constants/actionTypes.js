@@ -10,3 +10,5 @@ export const TOGGLE_SKILLS = 'TOGGLE_SKILLS'; // Toggle skills pop-up
 export const DELETE_SKILLS = 'DELETE_SKILLS';
 
 export const DAILY_LOG = 'DAILY_LOG'
+
+export const TOGGLE_TODO = 'TOGGLE_TODO';
