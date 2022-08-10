@@ -4,6 +4,8 @@ const express = require('express');
 const router = express.Router();
 //require in the middleware functions
 const { createAccount, login, loginSucess, createSkill } = require('../controller/controller.js');
+const {createSkill} = require('../controller/skills_controller.js');
+
 
 //route for post request to signup/create an account
 router.post('/signup', createAccount, (req, res) => {
@@ -11,8 +13,8 @@ router.post('/signup', createAccount, (req, res) => {
 });
 
 //route to login in and fetch the data upon login
-router.get('/login', login, loginSucess, (req,res) => {
-    return res.status(200).json()
+router.post('/login', login, loginSucess, (req,res) => {
+    return res.status(200).json(res.locals.onLogin)
 })
 
 // route to post new skill to database

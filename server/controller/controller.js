@@ -25,7 +25,7 @@ module.exports = {
         if(err) {
           //if error we want to send to front to be unsucessful
           res.locals.account = 'unsucessful'
-          next({
+          return next({
             log: 'Express error handler caught in createAccount middleware function',
             message: { err }
           });
@@ -45,20 +45,23 @@ module.exports = {
     //then we want to query the database and pull the data that matches the username 
     pool.query('SELECT * FROM Users WHERE username = $1', [username], (err, user) => {
       if (err) {
-        next({
+        return next({
           log: 'Express error handler caught in login middleware function',
           message: { err }
         });
       } else {
+       //we use this current query to assign the user id to a res.locals variable 
+        res.locals.user = user.rows
+        //res.locals.userId = data.rows
         //then we want to use bcrypt compare to compare the password given from the request and the hashed passwoed from the db
         bcrypt.compare(password, user.rows[0].hash_password, (err, result) => {
+          res.locals.login = result;
           if (result === false){
             next({
               log:'Wrong username/password',
               message:{ err }
             })
           }else{
-            console.log('RESULT:' + result)
             return next();
           }
         })
@@ -68,43 +71,68 @@ module.exports = {
   },
   //need a sucessful login middleware 
   loginSucess: (req,res,next) => {
-   
-    //console.log(req)
-    //we want the three most recent tasks that correspond with userid
-    //we want all the skills with the corresponding userid 
-    //we want to query for that dates daily log that correspond with user id
-  },
+    //we want to declare a user id variable here 
+    const { first_name, user_id, last_name, email } = res.locals.user[0];
+    //first we have a check if res.locals.login = true or false if false we need to set a conditional res.locals to either send unsucessful login or the query data
+    if(res.locals.login === false){
+      res.locals.loginres = 'unsucessful'
+    }else{
+      //first we declare the result object with the three properties tasks skills dailylog
+      const result = {
+        user:{
+          firstName: first_name,
+          lastName: last_name,
+          email: email
+        }
+      }
 
-  ////////////////////////////////
-
-// addSkills to database
-  createSkill: (req, res, next) => {
-
-    const {skillName, skillStatus, skillNotes} = req.body;
-    const {username} = req.params;
-    const query = `INSERT INTO Skills (skill_name, skill_status, skill_notes, user_id) VALUES ($1, $2, $3, (SELECT user_id FROM Users WHERE username = $4)) RETURNING *`
-
-    pool.query(query, [skillName, skillStatus, skillNotes, username])
-      .then((data) => {
-        // console.log(data.rows[0].user_id)
-        res.locals.user_id = data.rows[0].user_id;
-        return next();
+      //first we will do the query statement to recieve the data for the tasks 
+      pool.query('SELECT * FROM Tasks WHERE user_id = $1 ORDER BY due_date ASC', [user_id], (err,data) => {
+        if (err) {
+         return next({
+            log: 'Express error handler caught in tasks query',
+            message: { err }
+          });
+        } else {
+          //then we want to splice and just get the first three elements from data.rows
+          const recentThreeTask = data.rows.slice(0,3);
+          // push that into the tasks value on the result object;
+          result.tasks = recentThreeTask;
+        }
       })
-      .catch((err) => next({
-        log: 'Express error handler caught in createSkill middleware function',
-        message: { err }
-      }))
+      //now we want to query the data base for skills we want to put out an array of objects of all skills 
+      pool.query('SELECT * FROM Skills WHERE user_id = $1', [user_id], (err,data) => {
+        if (err) {
+          return next({
+            log: 'Express error handler caught in skill query',
+            message: { err }
+          });
+        } else {
+          result.skills = data.rows;
+        }
+      })
+      //now we want to query the dailylog
+      pool.query('SELECT * FROM Log WHERE log_date = CURRENT_DATE', (err,data) => {
+        if (err) {
+          return next({
+            log: 'Express error handler caught in daily log query',
+            message: { err }
+          });
+        } else {
+          // console.log(data.rows[0].log_id)
+          // console.log(data.rows[0].log_title)
+          // console.log(data.rows[0].log_body)
+          result.dailyLog = {
+            logId: data.rows[0].log_id,
+            logTitle:data.rows[0].log_title,
+            logBody:data.rows[0].log_body,
+          }
+         
+         //lastly reassign res.locals to be equal to results
+         res.locals.onLogin = result;
+         return next()
+        }
+      }); 
+    };
   },
-
-// deleteSkills
-
-// updateSkills
-
 }
-
-
-
-//later we want to use bycrypt compare to compare plain text to the salted and hashed pass 
-
-
-
