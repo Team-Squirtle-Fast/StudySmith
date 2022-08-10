@@ -54,7 +54,8 @@ const SkillsPopUp = (props) => {
         fetch(`/api/skills/${props.username}/${props.id}`, {
             method: 'DELETE'
         })
-        .then(res => res.json())
+        .then(res => {
+            return res.json()})
         .then(res => {
             if(res === 'Unsuccessful'){
                 window.alert('Please try again');

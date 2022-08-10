@@ -34,8 +34,9 @@ const LogIn = (props) => {
             else {
                 // once backend is figured out, need to have the request with a payload of all the things that are going to load
                 // in the home page
-                // res = {user: {}, tasks: [], skills: [], dailLog: {}}
+                 //res = {user: {}, tasks: [], skills: [], dailLog: {}}
                 const { user, tasks, skills, dailyLog } = await res;
+                console.log(res);
 
                 const tasksUpdated = {};
 

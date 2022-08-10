@@ -125,7 +125,7 @@ const userReducer = (state = initialState, action) => {
         }
         case types.DELETE_SKILLS: {
             const skillsCopy = JSON.parse(JSON.stringify(state.skills));
-            delete skillsCopy[payload];
+            delete skillsCopy[action.payload];
 
             return {
                 ...state,
