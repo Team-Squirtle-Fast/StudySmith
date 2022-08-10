@@ -10,7 +10,7 @@ const App = (props) => {
     const loggedIn = useSelector((state) => state.user.loggedIn);
 
     //if(loggedIn){
-    if(true){
+    if(loggedIn){
         return(
             <div className='app'>
                 <Navbar/>

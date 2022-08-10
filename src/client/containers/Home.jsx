@@ -24,7 +24,7 @@ const Home = (props) => {
             resourceId={toDoPopUpResourceId}/> : null}
             <SkillsSection/>
             {skillsPopUpToggle ? <SkillsPopUp username={username} id={skillsPopUpId} name={skillsPopUpName} status={skillsPopUpStatus} notes={skillsPopUpNotes} /> : null}
-            <LogSection dailyLog={dailyLog}/>
+            <LogSection username={username} dailyLog={dailyLog}/>
         </div>
     )
 }

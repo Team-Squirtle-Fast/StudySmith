@@ -12,3 +12,5 @@ export const DELETE_SKILLS = 'DELETE_SKILLS';
 export const DAILY_LOG = 'DAILY_LOG'
 
 export const TOGGLE_TODO = 'TOGGLE_TODO';
+
+export const ADD_DAILY_LOG = 'ADD_DAILY_LOG';

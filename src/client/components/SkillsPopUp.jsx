@@ -19,13 +19,14 @@ const SkillsPopUp = (props) => {
     const handleSave = () => {
         const url = props.id === undefined ? `/api/skills/${props.username}` : `/api/skills/${props.username}/${props.id}`;
         let idFetch = props.id === undefined ? undefined : props.id;
+        const method = props.id === undefined ? 'POST' : 'PATCH';
 
 
         const statusFetch = statusRef.current.value === 'strong' ? 'green' :
             statusRef.current.value === 'average' ? 'yellow' : 'red';
 
         fetch(url, {
-            method: 'POST',
+            method: method,
             headers: {
                 'Content-Type': 'application/JSON',
             },
@@ -42,7 +43,7 @@ const SkillsPopUp = (props) => {
             } else {
                 if(!idFetch) idFetch = res.skillId
                 dispatch(addSkills({skillId: idFetch, skillName: titleRef.current.value, 
-                    skillStatus: statusRef.current.value, skillNotes: notesRef.current.value}))
+                    skillStatus: statusFetch, skillNotes: notesRef.current.value}))
                 dispatch(toggleSkills({}));
             }  
         })

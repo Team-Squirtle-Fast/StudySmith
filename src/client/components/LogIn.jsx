@@ -36,6 +36,7 @@ const LogIn = (props) => {
                 // in the home page
                 // res = {user: {}, tasks: [], skills: [], dailLog: {}}
                 const { user, tasks, skills, dailyLog } = res;
+                console.log(res)
 
                 const tasksUpdated = {};
 
