@@ -10,7 +10,7 @@ const routes = require('./routes/routes.js');
 //we are statically serving the files from the dist folder
 app.use(express.static(path.resolve(__dirname, '../dist')));
 //require the controller to test in postman 
-const { createAccount, postToData, login } = require('./controller/controller')
+const { createAccount, postToData, login } = require('./controller/account_controller')
 app.use(express.json())
 
 
