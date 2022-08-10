@@ -132,6 +132,12 @@ const userReducer = (state = initialState, action) => {
                 skills: skillsCopy,
             }
         }
+        case types.ADD_DAILY_LOG: {
+            return {
+                ...state,
+                dailyLog: action.payload,
+            }
+        }
         default: {
             return state;
         }

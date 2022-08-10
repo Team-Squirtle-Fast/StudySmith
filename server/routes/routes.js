@@ -23,9 +23,9 @@ router.get('/log/:username', getLog, (req,res) => {
     return res.status(200).json(res.locals.logsgot)
 })
 //route to make a post request for the daily log 
-router.post('/log/:username', newLog, (req,res) => {
-    return res.status(200).json()
-})
+// router.post('/log/:username', newLog, (req,res) => {
+//     return res.status(200).json()
+// })
 
 // route to post new skill to database
 router.post('/skills/:username', createSkill, (req, res) => {

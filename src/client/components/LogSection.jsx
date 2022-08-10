@@ -3,6 +3,7 @@ import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
 import '../../styles/LogSection.scss';
+import { addDailyLog } from '../actions/actions';
 
 const LogSection = (props) => {
     const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const LogSection = (props) => {
                 'Content-Type': 'application/JSON',
             },
             body: JSON.stringify({
-                title: titleRef.current.value,
+                log_title: titleRef.current.value,
                 log_body: bodyRef.current.value,
             })
         })
@@ -31,7 +32,7 @@ const LogSection = (props) => {
                 window.alert('Please try again');
             } else {
                 if(!idFetch) idFetch = res.skillId
-                dispatch(addSkills({logId: idFetch, logtitle: titleRef.current.value, 
+                dispatch(addDailyLog({logId: idFetch, logtitle: titleRef.current.value, 
                     logBody: bodyRef.current.value}))
             }  
         })
