@@ -12,8 +12,8 @@ module.exports = {
 
         db.query(query, [skillName, skillStatus, skillNotes, username])
             .then((data) => {
-                // console.log(data.rows[0].user_id)
-                res.locals.user_id = data.rows[0].user_id;
+                console.log(data.rows[0].skill_id)
+                res.locals.skill_id = data.rows[0].skill_id;
                 return next();
             })
             .catch((err) => next({
@@ -32,11 +32,11 @@ module.exports = {
         
         db.query(query, [skill_id])
             .then(() => {
-                res.locals.deleteSkill = 'Successful'
+                res.locals.deleteSkill = 'Successful';
                 return next();
             })
             .catch((err) => {
-                res.locals.deleteSkill = 'Unsuccessful'
+                res.locals.deleteSkill = 'Unsuccessful';
                 return next({
                     log: 'Express error handler caught in deleteSkill middleware function',
                     message: { err }
@@ -49,6 +49,20 @@ module.exports = {
         const {skillName, skillStatus, skillNotes} = req.body;
         const { skill_id } = req.params;
 
-        const query = 'UPDATE '
+        const query = 'UPDATE Skills SET skill_name = $1, skill_status = $2, skill_notes = $3 WHERE skill_id = $4;';
+
+        db.query(query, [skillName, skillStatus, skillNotes, skill_id])
+            .then(() => {
+                res.locals.updateSkill = 'Successful';
+                return next();
+            })
+            .catch((err) => {
+                res.locals.updateSkill = 'Unsuccessful';
+                return next({
+                    log: 'Express error handler caught in updateSkill middleware function',
+                    message: { err }
+                })
+            })
+
     }
 }
