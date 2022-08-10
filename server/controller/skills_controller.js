@@ -33,6 +33,7 @@ module.exports = {
         db.query(query, [skill_id])
             .then(() => {
                 res.locals.deleteSkill = 'Successful'
+                return next();
             })
             .catch((err) => {
                 res.locals.deleteSkill = 'Unsuccessful'
@@ -41,8 +42,13 @@ module.exports = {
                     message: { err }
                 })
             })
-    }
+    },
 
     // updateSkills
+    updateSkill: (req, res, next) => {
+        const {skillName, skillStatus, skillNotes} = req.body;
+        const { skill_id } = req.params;
 
+        const query = 'UPDATE '
+    }
 }
