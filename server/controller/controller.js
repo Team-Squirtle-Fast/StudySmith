@@ -111,22 +111,25 @@ module.exports = {
         }
       })
       //now we want to query the dailylog
-      db.query('SELECT * FROM Log WHERE log_date = CURRENT_DATE', (err,data) => {
+      db.query('SELECT * FROM Log WHERE log_date = CURRENT_DATE AND user_id = $1', [user_id], (err,data) => {
         if (err) {
           return next({
             log: 'Express error handler caught in daily log query',
             message: { err }
           });
         } else {
-          // console.log(data.rows[0].log_id)
-          // console.log(data.rows[0].log_title)
-          // console.log(data.rows[0].log_body)
-          result.dailyLog = {
-            logId: data.rows[0].log_id,
-            logTitle:data.rows[0].log_title,
-            logBody:data.rows[0].log_body,
+          console.log(data.rows)
+          if (!data.rows[0]) {
+            result.dailyLog = [];
+          }else{
+            //now we want to add each of these values to the keys and add to the result object 
+            result.dailyLog = {
+              logId: data.rows[0].log_id,
+              logTitle:data.rows[0].log_title,
+              logBody:data.rows[0].log_body,
+            }
+           
           }
-         
          //lastly reassign res.locals to be equal to results
          res.locals.onLogin = result;
          return next()
@@ -134,4 +137,25 @@ module.exports = {
       }); 
     };
   },
+
+  //now we want to write the middleware for the daily log get request and post request
+  getLog: (req,res,next) => {
+    //first we want to destructure getting the username from the req.params 
+    const { username } = req.params;
+    //we then want to make our query pulling all the logs where the username/userid 
+    pool.query('SELECT * FROM Log WHERE user_id = (SELECT user_id FROM Users WHERE username = $1)', [username], (err,data) => {
+      if (err) {
+        return next({
+          log: 'Express error handler caught in getLog middleware function',
+          message: { err }
+        });
+      } else {
+        console.log(data.rows);
+        res.locals.logsgot = data.rows;
+        return next();
+      }
+
+    })
+  }
+
 }
