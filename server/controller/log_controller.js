@@ -26,5 +26,23 @@ module.exports = {
 
     })
   },
+  newLog: (req,res,next) => {
+    //first we want to destructure getting the username from the req.params 
+    const { username } = req.params;
+    //we then want to make our query inserting into the database 
+    // pool.query('SELECT * FROM Log WHERE user_id = (SELECT user_id FROM Users WHERE username = $1)', [username], (err,data) => {
+    //   if (err) {
+    //     return next({
+    //       log: 'Express error handler caught in getLog middleware function',
+    //       message: { err }
+    //     });
+    //   } else {
+    //     console.log(data.rows);
+        return next();
+    //   }
+
+    // })
+  },
+
 
 }
