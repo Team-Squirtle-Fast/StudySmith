@@ -7,8 +7,9 @@ const initialState = {
     firstName: '',
     lastName: '',
     email: '',
-    tasks: {},
-    //skills: [],
+    tasks: {3: {taskTitle: 'study front end', dueDate: '2023-04-13'}, 4: {taskTitle: 'study backend', dueDate: '2023-04-14'},
+            5: {taskTitle: 'study SDI', dueDate: '2023-04-15'}},
+    //skills: {},
     skills: {1: {skillName: 'AWS', skillStatus: 'red', skillNotes: 'Study More'}, 2: {skillName: 'TypeScript', skillStatus: 'yellow', skillNotes: 'TypeScript study enums'},
             3: {skillName: 'Docker', skillStatus: 'green', skillNotes: 'Docker good'}},
     // dailyLog: {},
@@ -21,6 +22,12 @@ const initialState = {
     logTitle: '',
     logBody: '',
     logDate: '',
+
+    toDoPopUpToggle: false,
+    toDoPopUpTaskId: '', 
+    toDoPopUpTaskDueDate: '',
+    toDoPopUpTaskTitle: '',
+    toDoPopUpResourceId: ''
 };
 
 // example of what skills & tasks looks like, where the key represents the id
@@ -81,6 +88,17 @@ const userReducer = (state = initialState, action) => {
                 skillsPopUpName: skillName,
                 skillsPopUpStatus: skillStatus,
                 skillsPopUpNotes: skillNotes,
+            }
+        }
+        case types.TOGGLE_TODO: {
+            const {taskId, taskDueDate, taskTitle, resourceId} = action.payload;
+            return {
+                ...state,
+                toDoPopUpToggle: !state.toDoPopUpToggle,
+                toDoPopUpTaskId: taskId,
+                toDoPopUpTaskDueDate: taskDueDate,
+                toDoPopUpTaskTitle: taskTitle,
+                toDoPopUpResourceId: resourceId
             }
         }
         case types.ADD_SKILLS: {

@@ -44,6 +44,16 @@ export const toggleSkills = (skillId, skillName, skillStatus, skillNotes) => ({
   }
 });
 
+export const toggleToDo = (taskId, taskDueDate, taskTitle, resourceId) => ({
+  type: types.TOGGLE_TODO,
+  payload: {
+    taskId,
+    taskDueDate,
+    taskTitle,
+    resourceId
+  }
+});
+
 export const dailyLog = (logTitle, logBody, logDate) => ({
   type: types.DAILY_LOG,
   payload: {

@@ -1,0 +1,35 @@
+@import './_variables.scss';
+
+.daily-log-container{
+    margin-top: 20px;
+}
+
+.daily-log-title {
+    color: $ss-grey;
+    background-color: transparent;
+    border: none;
+    margin-bottom: 10px;
+
+    font-size: 18px;
+    font-family: Poppins;
+}
+
+.daily-log-title:focus {
+    outline: none;
+}
+
+.daily-log-body {
+    resize: vertical;
+    width: 40%;
+    min-width: 250px;
+    min-height: 100px;;
+    background-color: transparent;
+
+    font-family: Roboto;
+    font-size: 14px;
+    color: $ss-black;
+}
+
+.log-section {
+    margin-top: 50px;
+}

@@ -3,9 +3,9 @@ import { useRef } from "react";
 import { useDispatch } from "react-redux";
 
 import '../../styles/SkillsPopUp.scss';
-import { toggleSkills, addSkills, deleteSkills } from "../actions/actions";
+import { toggleToDo, addSkills, deleteSkills } from "../actions/actions";
 
-const SkillsPopUp = (props) => {
+const ToDoPopUp = (props) => {
     const dispatch = useDispatch();
 
     const statusRef = useRef(null);
@@ -13,7 +13,7 @@ const SkillsPopUp = (props) => {
     const titleRef = useRef(null);
 
     const handleClick = () => {
-        dispatch(toggleSkills());
+        dispatch(toggleToDo());
     };
 
     const handleSave = () => {
@@ -65,26 +65,19 @@ const SkillsPopUp = (props) => {
         .catch(err => console.log(err))
     }
 
-    const status = props.status === 'red' ? 'weak' :
-        props.status === 'yellow' ? 'average' : 'strong';
+    console.log(props.taskTitle)
 
   return(
     <div className="modal">
         <div className="modal_content">
             <span className="close" onClick={handleClick}>&times;    </span>
             <div>
-                <input className="popup-title" defaultValue={props.name} ref={titleRef}/>
+                <input className="popup-title" defaultValue={props.taskTitle} ref={titleRef}/>
             </div>
             
             <div>
                 <textarea className='skills-popup-notes' defaultValue={props.notes} ref={notesRef}/>
             </div>
-            <label htmlFor="status">Knowledge Status: </label>
-            <select className='select-status' name='status' id='status' defaultValue={status} ref={statusRef}>
-                <option value='strong'>Strong</option>
-                <option value='average'>Average</option>
-                <option value='weak'>Weak</option>
-            </select>
             <div className='skills-popup-buttons-container'>
                 <button onClick={handleSave}>Save</button>
                 <button onClick={handleDelete}>Delete</button>
@@ -94,4 +87,4 @@ const SkillsPopUp = (props) => {
   )
 };
 
-export default SkillsPopUp;
+export default ToDoPopUp;

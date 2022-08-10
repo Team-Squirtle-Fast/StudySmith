@@ -1,0 +1,15 @@
+@import './variables.scss';
+
+.taskRow{
+    color:$ss-black;
+    font-family: Roboto;
+    margin-bottom: 5px;
+    font-size: 20px;
+    margin-top:15px;
+}
+
+.to-do-container {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px dotted $ss-grey;
+}

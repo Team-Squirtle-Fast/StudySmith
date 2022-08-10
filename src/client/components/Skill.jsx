@@ -10,11 +10,11 @@ const Skill = (props) => {
         dispatch(toggleSkills(props.skillId, props.skillName, props.skillStatus, props.skillNotes));
     }
 
-    const color = props.skillStatus === 'red' ? '#696773' :
+    const color = props.skillStatus === 'red' ? '#69677380' :
     props.skillStatus === 'yellow' ? '#FED766' : '#95F696';
 
     return(
-        <button id={props.skillId} style={{'backgroundColor': color, 'marginRight': '5px'}} onClick={handleToggle}>
+        <button className='skill-button' id={props.skillId} style={{'backgroundColor': color, 'marginRight': '5px'}} onClick={handleToggle}>
             {props.skillName}
         </button>
     )
