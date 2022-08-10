@@ -7,13 +7,14 @@ const initialState = {
     firstName: '',
     lastName: '',
     email: '',
-    tasks: {3: {taskTitle: 'study front end', dueDate: '2023-04-13'}, 4: {taskTitle: 'study backend', dueDate: '2023-04-14'},
-            5: {taskTitle: 'study SDI', dueDate: '2023-04-15'}},
-    //skills: {},
-    skills: {1: {skillName: 'AWS', skillStatus: 'red', skillNotes: 'Study More'}, 2: {skillName: 'TypeScript', skillStatus: 'yellow', skillNotes: 'TypeScript study enums'},
-            3: {skillName: 'Docker', skillStatus: 'green', skillNotes: 'Docker good'}},
-    // dailyLog: {},
-    dailyLog: {logTitle: 'Redux is challenging', logBody: 'I will get better at Redux', logDate: '8/9/2022'},
+    tasks: {},
+    //tasks: {3: {taskTitle: 'study front end', dueDate: '2023-04-13'}, 4: {taskTitle: 'study backend', dueDate: '2023-04-14'},
+    //        5: {taskTitle: 'study SDI', dueDate: '2023-04-15'}},
+    skills: {},
+    //skills: {1: {skillName: 'AWS', skillStatus: 'red', skillNotes: 'Study More'}, 2: {skillName: 'TypeScript', skillStatus: 'yellow', skillNotes: 'TypeScript study enums'},
+    //        3: {skillName: 'Docker', skillStatus: 'green', skillNotes: 'Docker good'}},
+    dailyLog: {},
+    //dailyLog: {logTitle: 'Redux is challenging', logBody: 'I will get better at Redux', logId: 1},
     skillsPopUpToggle: false,
     skillsPopUpId: '',
     skillsPopUpName: '',
@@ -124,7 +125,7 @@ const userReducer = (state = initialState, action) => {
         }
         case types.DELETE_SKILLS: {
             const skillsCopy = JSON.parse(JSON.stringify(state.skills));
-            delete skillsCopy[payload];
+            delete skillsCopy[action.payload];
 
             return {
                 ...state,
