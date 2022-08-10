@@ -33,6 +33,7 @@ module.exports = {
         db.query(query, [skill_id])
             .then(() => {
                 res.locals.deleteSkill = 'Successful'
+                return next();
             })
             .catch((err) => {
                 res.locals.deleteSkill = 'Unsuccessful'

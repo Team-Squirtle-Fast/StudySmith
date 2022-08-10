@@ -37,6 +37,7 @@ module.exports = {
    })
   },
   login: (req,res,next) => {
+    console.log(req.body)
     //first we want to desructure the request body
     const { username, password } = req.body;
     //then we want to query the database and pull the data that matches the username 
@@ -95,46 +96,46 @@ module.exports = {
           const recentThreeTask = data.rows.slice(0,3);
           // push that into the tasks value on the result object;
           result.tasks = recentThreeTask;
+                //now we want to query the data base for skills we want to put out an array of objects of all skills 
+            db.query('SELECT * FROM Skills WHERE user_id = $1', [user_id], (err,data) => {
+              if (err) {
+                return next({
+                  log: 'Express error handler caught in skill query',
+                  message: { err }
+                });
+              } else {
+                const skills = data.rows;
+                result.skills = skills;
+                console.log('result:', result)
+                      //now we want to query the dailylog
+                      db.query('SELECT * FROM Log WHERE log_date = CURRENT_DATE AND user_id = $1', [user_id], (err,data) => {
+                        if (err) {
+                          return next({
+                            log: 'Express error handler caught in daily log query',
+                            message: { err }
+                          });
+                        } else {
+                          console.log(data.rows)
+                          if (!data.rows[0]) {
+                            result.dailyLog = [];
+                          }else{
+                            //now we want to add each of these values to the keys and add to the result object 
+                            result.dailyLog = {
+                              logId: data.rows[0].log_id,
+                              logTitle:data.rows[0].log_title,
+                              logBody:data.rows[0].log_body,
+                            }
+                          
+                          }
+                        //lastly reassign res.locals to be equal to results
+                        res.locals.onLogin = result;
+                        return next()
+                        }
+                      }); 
+              }
+            })
         }
       })
-      //now we want to query the data base for skills we want to put out an array of objects of all skills 
-      db.query('SELECT * FROM Skills WHERE user_id = $1', [user_id], (err,data) => {
-        if (err) {
-          return next({
-            log: 'Express error handler caught in skill query',
-            message: { err }
-          });
-        } else {
-          const skills = data.rows;
-          result.skills = skills;
-          console.log('result:', result)
-        }
-      })
-      //now we want to query the dailylog
-      db.query('SELECT * FROM Log WHERE log_date = CURRENT_DATE AND user_id = $1', [user_id], (err,data) => {
-        if (err) {
-          return next({
-            log: 'Express error handler caught in daily log query',
-            message: { err }
-          });
-        } else {
-          console.log(data.rows)
-          if (!data.rows[0]) {
-            result.dailyLog = [];
-          }else{
-            //now we want to add each of these values to the keys and add to the result object 
-            result.dailyLog = {
-              logId: data.rows[0].log_id,
-              logTitle:data.rows[0].log_title,
-              logBody:data.rows[0].log_body,
-            }
-           
-          }
-         //lastly reassign res.locals to be equal to results
-         res.locals.onLogin = result;
-         return next()
-        }
-      }); 
     };
   },
 
