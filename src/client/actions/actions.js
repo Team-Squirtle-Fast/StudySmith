@@ -77,3 +77,7 @@ export const addDailyLog = (logId, logTitle, logBody) => ({
   }
 })
 
+export const logOut = () => ({
+  type: types.LOGOUT
+})
+

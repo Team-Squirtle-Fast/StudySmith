@@ -9,8 +9,8 @@ import { useSelector } from 'react-redux';
 const App = (props) => {
     const loggedIn = useSelector((state) => state.user.loggedIn);
 
-    //if(loggedIn){
-    if(true){
+    if(loggedIn){
+    //if(true){
         return(
             <div className='app'>
                 <Navbar/>

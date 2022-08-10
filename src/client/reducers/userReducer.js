@@ -137,6 +137,12 @@ const userReducer = (state = initialState, action) => {
                 ...state,
                 dailyLog: action.payload,
             }
+        } 
+        case types.LOGOUT: {
+            return {
+                ...state,
+                loggedIn: false
+            }
         }
         default: {
             return state;

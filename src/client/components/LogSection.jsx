@@ -12,7 +12,7 @@ const LogSection = (props) => {
     const bodyRef = useRef(null);
 
     const handleSave = () => {
-        const url = props.dailyLog.logId === undefined ? `/api/log/${props.username}` : `/api/skills/${props.username}/${props.dailyLog.logId}`;
+        const url = props.dailyLog.logId === undefined ? `/api/log/${props.username}` : `/api/log/${props.username}/${props.dailyLog.logId}`;
         let idFetch = props.dailyLog.logId === undefined ? undefined : props.dailyLog.logId;
         const method = props.dailyLog.logId === undefined ? 'POST' : 'PATCH';
 
@@ -28,7 +28,7 @@ const LogSection = (props) => {
         })
         .then(res => res.json())
         .then(res => {
-            if(res === 'Unsuccessful'){
+            if(res === 'unsucessful'){
                 window.alert('Please try again');
             } else {
                 if(!idFetch) idFetch = res.skillId
