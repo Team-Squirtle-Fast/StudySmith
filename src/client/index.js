@@ -22,7 +22,7 @@ root.render(
               <Route path='/signup' element={<Signup/>} />
               <Route path='/' element={<App/>}>
                 <Route path='/resources' element={<Resources/>}/>
-                <Route path='/dailylog' element={<DailyLog/>}/>
+                <Route path='/log' element={<DailyLog/>}/>
                 <Route path='/calendar' element={<Calendar/>}/>
                 <Route path='/settings' element={<Settings/>}/>
                 <Route path='/' element={<Home/>}/>

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 
 import InputLabel from './InputLabel.jsx';
 import '../../styles/Signup.scss';
-import { getLogin } from "../actions/actions.js";
+import { signUp } from "../actions/actions.js";
 
 const Signup = (props) => {
     const firstnameRef = useRef(null);
@@ -40,7 +40,8 @@ const Signup = (props) => {
             .then((res) => res.json())
             .then((res) => {
                 if(res === 'sucessful'){
-                    dispatch(getLogin());
+                    // create a separate dispatch for signup
+                    dispatch(signUp(usernameRef.current.value, firstnameRef.current.value, lastnameRef.current.value, emailRef.current.value));
                     navigate('../', {replace: true});
                 } else {
                     window.alert('Username or email registered to another account')
