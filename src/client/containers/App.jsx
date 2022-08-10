@@ -4,10 +4,13 @@ import { Outlet } from "react-router-dom";
 
 import Navbar from '../components/Navbar.jsx';
 import LogIn from '../components/LogIn.jsx';
+import { useSelector } from 'react-redux';
 
 const App = (props) => {
-    const loggedIn = false; // update with state
-    if(loggedIn){
+    const loggedIn = useSelector((state) => state.user.loggedIn);
+
+    //if(loggedIn){
+    if(true){
         return(
             <div className='app'>
                 <Navbar/>
