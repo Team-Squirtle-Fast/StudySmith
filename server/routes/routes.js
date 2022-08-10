@@ -2,9 +2,10 @@
 const express = require('express');
 //declare and intialize the express router 
 const router = express.Router();
-//require in the middleware functions
-const { createAccount, login, loginSucess, getLog } = require('../controller/controller.js');
-const { createSkill } = require('../controller/skills_controller.js');
+//require in the middleware functions from the modular files
+const { createAccount, login, loginSucess } = require('../controller/account_controller.js');
+const { createSkill } = require('../controller/skills_controlle;r.js');
+const { getLog } = require('../controller/log_controller.js')
 
 
 //route for post request to signup/create an account
@@ -17,9 +18,13 @@ router.post('/login', login, loginSucess, (req,res) => {
     return res.status(200).json(res.locals.onLogin)
 })
 
-//route to make a get request for the daily logs 
+//route to make a get request for the all logs
 router.get('/log/:username', getLog, (req,res) => {
     return res.status(200).json(res.locals.logsgot)
+})
+//route to make a post request for the daily log 
+router.post('/log/:username', newLog, (req,res) => {
+    return res.status(200).json()
 })
 
 // route to post new skill to database
