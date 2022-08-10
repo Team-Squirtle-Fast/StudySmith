@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 //require in the middleware functions from the modular files
 const { createAccount, login, loginSucess } = require('../controller/account_controller.js');
-const { createSkill } = require('../controller/skills_controlle;r.js');
+const { createSkill } = require('../controller/skills_controller.js');
 const { getLog } = require('../controller/log_controller.js')
 
 
