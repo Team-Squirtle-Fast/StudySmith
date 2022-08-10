@@ -1,10 +1,7 @@
 //need to require needed packages 
 const bcrypt = require('bcrypt');
-const { Pool } = require('pg');
-//need to declare a connection string 
-const connectionString = require('../models/dataModel');
-//need to create a new pool instance passing in the connection string
-const pool = new Pool({ connectionString });
+const db = require('../models/dataModel.js');
+
 //we want to declare a const of salt round to determine the amout of salt iterations
 const saltRounds = 13;
 
@@ -21,7 +18,7 @@ module.exports = {
       //we then push the hashed password into the array
       accArr.push(hash)
       //we insert the array into the query statment to add a user to the database
-      pool.query('INSERT INTO Users(first_name,last_name, username, email, hash_password) VALUES($1,$2,$3,$4,$5)', accArr, (err,data) => {
+      db.query('INSERT INTO Users(first_name,last_name, username, email, hash_password) VALUES($1,$2,$3,$4,$5)', accArr, (err,data) => {
         if(err) {
           //if error we want to send to front to be unsucessful
           res.locals.account = 'unsucessful'
@@ -43,7 +40,7 @@ module.exports = {
     //first we want to desructure the request body
     const { username, password } = req.body;
     //then we want to query the database and pull the data that matches the username 
-    pool.query('SELECT * FROM Users WHERE username = $1', [username], (err, user) => {
+    db.query('SELECT * FROM Users WHERE username = $1', [username], (err, user) => {
       if (err) {
         return next({
           log: 'Express error handler caught in login middleware function',
@@ -87,7 +84,7 @@ module.exports = {
       }
 
       //first we will do the query statement to recieve the data for the tasks 
-      pool.query('SELECT * FROM Tasks WHERE user_id = $1 ORDER BY due_date ASC', [user_id], (err,data) => {
+      db.query('SELECT * FROM Tasks WHERE user_id = $1 ORDER BY due_date ASC', [user_id], (err,data) => {
         if (err) {
          return next({
             log: 'Express error handler caught in tasks query',
@@ -101,18 +98,20 @@ module.exports = {
         }
       })
       //now we want to query the data base for skills we want to put out an array of objects of all skills 
-      pool.query('SELECT * FROM Skills WHERE user_id = $1', [user_id], (err,data) => {
+      db.query('SELECT * FROM Skills WHERE user_id = $1', [user_id], (err,data) => {
         if (err) {
           return next({
             log: 'Express error handler caught in skill query',
             message: { err }
           });
         } else {
-          result.skills = data.rows;
+          const skills = data.rows;
+          result.skills = skills;
+          console.log('result:', result)
         }
       })
       //now we want to query the dailylog
-      pool.query('SELECT * FROM Log WHERE log_date = CURRENT_DATE', (err,data) => {
+      db.query('SELECT * FROM Log WHERE log_date = CURRENT_DATE', (err,data) => {
         if (err) {
           return next({
             log: 'Express error handler caught in daily log query',
