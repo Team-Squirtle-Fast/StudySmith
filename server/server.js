@@ -13,8 +13,8 @@ app.use(express.static(path.resolve(__dirname, '../dist')));
 const { createAccount, postToData, login } = require('./controller/controller')
 app.use(express.json())
 
-app.use('/api', routes);
 
+app.use('/api', routes);
 
 
 //local error handler 

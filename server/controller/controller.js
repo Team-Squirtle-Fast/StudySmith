@@ -41,7 +41,7 @@ module.exports = {
   },
   login: (req,res,next) => {
     //first we want to desructure the request body 
-    const { username, password } = req.body
+    const { username, password } = req.body;
     //then we want to query the database and pull the data that matches the username 
     pool.query('SELECT * FROM Users WHERE username = $1', [username], (err, user) => {
       if (err) {
@@ -77,25 +77,28 @@ module.exports = {
 
   ////////////////////////////////
 
+// addSkills to database
+  createSkill: (req, res, next) => {
 
-// getSkills
-  getSkills: (req, res, next) => {
+    const {skillName, skillStatus, skillNotes} = req.body;
+    const {username} = req.params;
+    const query = `INSERT INTO Skills (skill_name, skill_status, skill_notes, user_id) VALUES ($1, $2, $3, (SELECT user_id FROM Users WHERE username = $4)) RETURNING *`
 
-    const { skillID } = req.body;
-
-    pool.query('SELECT skill_name, skill_status, skill_notes FROM Skills WHERE skill_id = skillID')
-      .then(data => {
-       
+    pool.query(query, [skillName, skillStatus, skillNotes, username])
+      .then((data) => {
+        // console.log(data.rows[0].user_id)
+        res.locals.user_id = data.rows[0].user_id;
+        return next();
       })
-      .then(data => {
+      .catch((err) => next({
+        log: 'Express error handler caught in createSkill middleware function',
+        message: { err }
+      }))
+  },
 
-      })
-      .catch(err => next())
-  }
+// deleteSkills
 
 // updateSkills
-// deleteSkills
-// addSkills
 
 }
 
