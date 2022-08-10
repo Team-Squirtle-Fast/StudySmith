@@ -1,9 +1,5 @@
-//need to require needed packages 
-const { Pool } = require('pg');
-//need to declare a connection string 
-const connectionString = require('../models/dataModel');
-//need to create a new pool instance passing in the connection string
-const pool = new Pool({ connectionString });
+//need to require in the instance of the pool
+const db = require('../models/dataModel.js')
 
 //export the middleware functions
 module.exports = {
@@ -12,7 +8,7 @@ module.exports = {
     //first we want to destructure getting the username from the req.params 
     const { username } = req.params;
     //we then want to make our query pulling all the logs where the username/userid 
-    pool.query('SELECT * FROM Log WHERE user_id = (SELECT user_id FROM Users WHERE username = $1)', [username], (err,data) => {
+    db.query('SELECT * FROM Log WHERE user_id = (SELECT user_id FROM Users WHERE username = $1)', [username], (err,data) => {
       if (err) {
         return next({
           log: 'Express error handler caught in getLog middleware function',
@@ -30,7 +26,7 @@ module.exports = {
     //first we want to destructure getting the username from the req.params 
     const { username } = req.params;
     //we then want to make our query inserting into the database 
-    // pool.query('SELECT * FROM Log WHERE user_id = (SELECT user_id FROM Users WHERE username = $1)', [username], (err,data) => {
+    // db.query('SELECT * FROM Log WHERE user_id = (SELECT user_id FROM Users WHERE username = $1)', [username], (err,data) => {
     //   if (err) {
     //     return next({
     //       log: 'Express error handler caught in getLog middleware function',

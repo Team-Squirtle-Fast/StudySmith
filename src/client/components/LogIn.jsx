@@ -27,7 +27,7 @@ const LogIn = (props) => {
         })
         .then((res) => {
             return res.json()})
-        .then((res) => {
+        .then(async (res) => {
             if (res === 'unsuccessful') {
                 window.alert('Incorrect credentials provided')
             }
@@ -35,8 +35,8 @@ const LogIn = (props) => {
                 // once backend is figured out, need to have the request with a payload of all the things that are going to load
                 // in the home page
                 // res = {user: {}, tasks: [], skills: [], dailLog: {}}
-                const { user, tasks, skills, dailyLog } = res;
-
+                const { user, tasks, skills, dailyLog } = await res;
+                console.log(res)
                 const tasksUpdated = {};
 
                 tasks.forEach(el => {
