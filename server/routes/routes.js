@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 //require in the middleware functions from the modular files
 const { createAccount, login, loginSucess } = require('../controller/account_controller.js');
-const { getLog } = require('../controller/log_controller.js');
+const { getLog, newLog, editLog } = require('../controller/log_controller.js');
 const { createSkill, deleteSkill } = require('../controller/skills_controller.js');
 
 
@@ -24,7 +24,11 @@ router.get('/log/:username', getLog, (req,res) => {
 })
 //route to make a post request for the daily log 
 router.post('/log/:username', newLog, (req,res) => {
-    return res.status(200).json()
+    return res.status(200).json(res.locals.logId)
+})
+//route to make patch request for a daily log
+router.patch('/log/:username/:logid', editLog, (req,res) => {
+    return res.status(200).json(res.locals.editLog)
 })
 
 // route to post new skill to database
