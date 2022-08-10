@@ -3,8 +3,8 @@ const express = require('express');
 //declare and intialize the express router 
 const router = express.Router();
 //require in the middleware functions
-const { createAccount, login, loginSucess, createSkill } = require('../controller/controller.js');
-const {createSkill} = require('../controller/skills_controller.js');
+const { createAccount, login, loginSucess } = require('../controller/controller.js');
+const { createSkill } = require('../controller/skills_controller.js');
 
 
 //route for post request to signup/create an account
