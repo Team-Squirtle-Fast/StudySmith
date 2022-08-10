@@ -132,6 +132,18 @@ const userReducer = (state = initialState, action) => {
                 skills: skillsCopy,
             }
         }
+        case types.ADD_DAILY_LOG: {
+            return {
+                ...state,
+                dailyLog: action.payload,
+            }
+        } 
+        case types.LOGOUT: {
+            return {
+                ...state,
+                loggedIn: false
+            }
+        }
         default: {
             return state;
         }

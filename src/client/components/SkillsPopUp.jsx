@@ -42,6 +42,7 @@ const SkillsPopUp = (props) => {
                 window.alert('Please try again');
             } else {
                 if(!idFetch) idFetch = res.skillId
+                console.log(idFetch)
                 dispatch(addSkills({skillId: idFetch, skillName: titleRef.current.value, 
                     skillStatus: statusFetch, skillNotes: notesRef.current.value}))
                 dispatch(toggleSkills({}));

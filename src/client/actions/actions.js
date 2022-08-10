@@ -68,3 +68,16 @@ export const deleteSkills = (skillId) => ({
   payload: skillId
 })
 
+export const addDailyLog = (logId, logTitle, logBody) => ({
+  type: types.ADD_DAILY_LOG,
+  payload: {
+    logId,
+    logTitle,
+    logBody
+  }
+})
+
+export const logOut = () => ({
+  type: types.LOGOUT
+})
+
