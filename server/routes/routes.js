@@ -11,8 +11,8 @@ router.post('/signup', createAccount, (req, res) => {
 });
 
 //route to login in and fetch the data upon login
-router.get('/login', login, loginSucess, (req,res) => {
-    return res.status(200).json()
+router.post('/login', login, loginSucess, (req,res) => {
+    return res.status(200).json(res.locals.onLogin)
 })
 
 
