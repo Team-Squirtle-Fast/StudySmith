@@ -41,7 +41,7 @@ module.exports = {
   },
   login: (req,res,next) => {
     //first we want to desructure the request body 
-    const { username, password } = req.body
+    const { username, password } = req.body;
     //then we want to query the database and pull the data that matches the username 
     pool.query('SELECT * FROM Users WHERE username = $1', [username], (err, user) => {
       if (err) {
@@ -134,5 +134,5 @@ module.exports = {
         }
       }); 
     };
-  }
+  },
 }
