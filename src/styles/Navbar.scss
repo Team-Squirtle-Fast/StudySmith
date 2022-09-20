@@ -1,0 +1,31 @@
+@import './variables.scss';
+
+nav {
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    padding-bottom: 100px;
+
+    background-color: $ss-blue;
+}
+
+a {
+    text-decoration: none;
+    color: $ss-white;
+    font-family: Roboto;
+    font-size: 20px;
+}
+
+.log-out {
+    background-color: transparent;
+    border: none;
+
+    text-decoration: none;
+    color: $ss-white;
+    font-family: Roboto;
+    font-size: 20px;
+}

@@ -1,0 +1,20 @@
+@import './variables.scss';
+
+.homeHeader {
+    color: $ss-orange;
+    font-family: 'Poppins';
+}
+
+.homeContainer {
+    margin-left: 15px;
+}
+
+.skill-button {
+    color: $ss-black
+}
+
+.skills-section {
+    margin-top: 40px;
+    border-bottom: 1px dotted $ss-grey;
+    padding-bottom: 25px;
+}

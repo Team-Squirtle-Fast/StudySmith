@@ -1,0 +1,35 @@
+@import './variables.scss';
+
+.input-label-label,
+.input-label-input {
+    font-family: 'Roboto';
+    color: $ss-black
+}
+
+.input-label-container {
+    padding-bottom: 16px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.input-label-label {
+    margin-bottom: 8px;
+}
+
+.input-label-input {
+    background-color: transparent;
+    border-top-style: hidden;
+    border-left-style: hidden;
+    border-right-style: hidden;
+
+    border-color: $ss-grey;
+    border-width: 1px;
+
+    min-width: 225px;
+    max-width: 250px;
+}
+
+.input-label-input:focus {
+    outline: none;
+}
